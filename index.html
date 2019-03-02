@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en" ng-app="myModule">
+<head>
+    <meta charset="utf-8">
+    <title>MyApp</title>
+    <script src="scripts/angular.js"></script>
+    <script src="scripts/script.js"></script>
+    <script src="scripts/filters.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .arrow-up{
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 10px solid black;
+            display: inline-block;
+        }
+        .arrow-down{
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 10px solid black;
+            display: inline-block;
+        }
+        th{
+            cursor: pointer;
+        }
+        .bros{
+            display: inline-block;
+            text-align: center;
+            border: 1px dashed red;
+            width: 45%;
+        }
+    </style>
+</head>
+<body>
+    <div style="border-top: black groove 2px;">
+        <h3>Video 18: $http Service</h3>
+        <div class="bros" ng-controller="myController">
+            
+        </div>
+    </div>
+    <div style="border-top: black groove 2px;">
+        <h3>Video 17: Consuming ASP NET Web Service in AngularJS using $http</h3>
+        <p>Lesson Skipped</p>
+    </div>
+    <div style="border-top: black groove 2px;">
+        <h3>Video 16: ng-include Directive</h3>
+        <p>This is not working for some unknown reasons.</p>
+        <div class="bros" ng-controller="myController">
+            <div ng-include="secondPage"></div>
+        </div>
+    </div>
+    <div style="border-top: black groove 2px;">
+        <h3>Video 15: ng-init Directive</h3>
+        <div class="bros" ng-init="students = [
+                        {name : 'Damini', age : 19, gender : 'Female', salary : 2000000},
+                        {name : 'Harshit', age : 19, gender : 'Male', salary : 2100000},
+                        {name : 'Kalash', age : 19, gender : 'Male', salary : 5000000.50},
+                        {name : 'Krutika', age : 19, gender : 'Female', salary : 2500000},
+                    ];">
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in students">
+                        <td>{{ $index +1 }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.age }}</td>
+                        <td>{{ student.gender }}</td>
+                        <td>{{ student.salary }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="border-top: black groove 2px;">
+        <h3>Video 14: ng-hide & ng-show Directives</h3>
+        <div class="bros" ng-controller="myController">
+            <input type="checkbox" ng-model="hideSalary">Hide Salary
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th ng-hide="hideSalary">Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in students">
+                        <td>{{ $index +1 }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.age }}</td>
+                        <td>{{ student.gender}}</td>
+                        <td ng-hide="hideSalary">{{ student.salary }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="bros" ng-controller="myController">
+            <input type="checkbox" ng-model="hideSalary">Mask Salary
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th ng-hide="hideSalary">Salary</th>
+                        <th ng-show="hideSalary">Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in students">
+                        <td>{{ $index +1 }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.age }}</td>
+                        <td>{{ student.gender}}</td>
+                        <td ng-hide="hideSalary">{{ student.salary }}</td>
+                        <td ng-show="hideSalary">$$$$$$$$</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="border-top: black groove 2px;">
+        <h3>Video 13: Creating Custom Filters</h3>
+        <div class="bros" ng-controller="myController">
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in students">
+                        <td>{{ $index +1 }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.age }}</td>
+                        <td>{{ student.gender | gender }}</td>
+                        <td>{{ student.salary }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="border-top: black groove 2px;">
+        <h3>Video 12: Search Filter With Multiple Properties</h3>
+        <div class="bros" ng-controller="myController">
+            Search Student : 
+            <input type="text" placeholder="Search Name" ng-model="searchText.name">
+            <input type="text" placeholder="Search Salary" ng-model="searchText.salary">
+            <input type="checkbox" ng-model="exactMatch">Exact Match
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in students | filter:searchText:exactMatch">
+                        <td>{{ $index +1 }}</td>
+                        <td>{{ student.name}}</td>
+                        <td>{{ student.age }}</td>
+                        <td>{{ student.gender }}</td>
+                        <td>{{ student.salary }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="bros" ng-controller="myController">
+            Search Student : 
+            <input type="text" placeholder="Search Name & Salary" ng-model="searchText">
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in students | filter:searchText:exactMatch">
+                        <td>{{ $index +1 }}</td>
+                        <td>{{ student.name}}</td>
+                        <td>{{ student.age }}</td>
+                        <td>{{ student.gender }}</td>
+                        <td>{{ student.salary }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="border-top: black groove 2px;">
+        <h3>Video 11: Search Filter</h3>
+        <div class="bros" ng-controller="myController">
+            Search Student : <input type="text" placeholder="Search Student" ng-model="searchText.name">
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in students | filter:searchText">
+                        <td>{{ $index +1 }}</td>
+                        <td>{{ student.name}}</td>
+                        <td>{{ student.age }}</td>
+                        <td>{{ student.gender }}</td>
+                        <td>{{ student.salary }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="border-top: black groove 2px;">
+        <h3>Video 10: Sorting By Row Headers</h3>
+        <div class="bros" ng-controller="myController">
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th ng-click="sortData('name')">Name<div ng-class="getSortClass('name')"></div></th>
+                        <th ng-click="sortData('age')">Age<div ng-class="getSortClass('age')"></div></th>
+                        <th ng-click="sortData('gender')">Gender<div ng-class="getSortClass('gender')"></div></th>
+                        <th ng-click="sortData('salary')">Salary<div ng-class="getSortClass('salary')"></div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in students | orderBy:sortCol:reverseSort">
+                        <td>{{ $index +1 }}</td>
+                        <td>{{ student.name}}</td>
+                        <td>{{ student.age }}</td>
+                        <td>{{ student.gender }}</td>
+                        <td>{{ student.salary }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="border-top: black groove 2px;">
+        <h3>Video 9: Sorting</h3>
+        <div class="bros" ng-controller="myController">
+            Order By : 
+            <select ng-model="sortCol">
+                <option value="name">Name Ascending</option>
+                <option value="-name">Name Descending</option>
+                <option value="gender">Gender Ascending</option>
+                <option value="-gender">Gender Descending</option>
+                <option value="salary">Salary Ascending</option>
+                <option value="-salary">Salary Descending</option>
+            </select>
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in students | orderBy:sortCol">
+                        <td>{{ $index +1 }}</td>
+                        <td>{{ student.name}}</td>
+                        <td>{{ student.age }}</td>
+                        <td>{{ student.gender }}</td>
+                        <td>{{ student.salary }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="border-top: black groove 2px;">
+        <h3>Video 8: Filters</h3>
+        <div class="bros" ng-controller="myController">
+            Rows To Display : <input type="number" step="1" min="0" max="4" ng-model="rowLimit">
+            <br>
+            Starting Index : <input type="number" step="1" min="1" max="4" ng-model="startIndex">
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Salary 1</th>
+                        <th>Salary 2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in students | limitTo:rowLimit:startIndex-1 ">
+                        <td>{{ $index +1 }}</td>
+                        <td>{{ student.name | uppercase}}</td>
+                        <td>{{ student.age }}</td>
+                        <td>{{ student.gender | lowercase }}</td>
+                        <td>{{ student.salary | number:2 }}</td>
+                        <td>{{ student.salary | currency:"Rs":1 }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="border-top: black groove 2px;">
+        <h3>Video 7: Events</h3>
+        <div class="bros" ng-controller="myController">
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Tech Name</th>
+                        <th>Likes</th>
+                        <th>Dislikes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="technology in technologies">
+                        <td>{{ $index +1 }}</td>
+                        <td>{{ technology.name }}</td>
+                        <td>{{ technology.likes }}</td>
+                        <td>{{ technology.dislikes }}</td>
+                        <td>
+                            <button type="button" ng-click="incrementLikes(technology)">Like</button>
+                            <button type="button" ng-click="incrementDislikes(technology)">Dislike</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="border-top: black groove 2px;">
+        <h3>Video 6: ng-repeat Directive</h3>
+        <div class="bros" ng-controller="myController">
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in students">
+                        <td>{{ $index +1 }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.age }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="border-top: black groove 2px;">
+        <h3>Video 5: Two Way Data Binding</h3>
+        <div class="bros" ng-controller="myController">
+            <input type="text" ng-model="message1">
+            <br>
+            Message 1 : {{ message1 }}
+            <br>
+            <input type="text" ng-model="message2">
+            <br>
+            Message 2 : {{ message2 }}
+        </div>
+    </div>
+    <div style="border-top: black groove 2px;">
+        <h3>Video 4: ng-src Directive</h3>
+        <div class="bros" ng-controller="myController">
+            Name    : {{ country.name }}
+            <br>
+            Capital : {{ country.capital }}
+            <br>
+            <img ng-src="{{ country.flag }}" style="width: 250px; height: 500px;">
+        </div>
+    </div>
+    <div style="border-top: black groove 2px;">
+        <h3>Video 3</h3>
+        <div class="bros" ng-controller="myController">
+            Name : {{ employee.name }}
+            <br>
+            Age  : {{ employee.age }}
+        </div>
+    </div>
+    <div style="border-top: black groove 2px;">
+        <h3>Video 2</h3>
+        <div class="bros" ng-controller="myController">
+            {{ message }}
+        </div>
+    </div>
+    <div style="border-top: black groove 2px;">
+        <h3>Video 1</h3>
+        <div class="bros">
+            10 + 20 = {{ 10 + 20 }}
+        </div>
+        <div class="bros">
+            True    = {{ 1==1 }}
+        </div>
+        <div class="bros">
+            False   = {{ 1==2 }}
+        </div>
+        <div class="bros">
+            Object  = {{ {name: 'David', age: 24}.name }}
+        </div>
+        <div class="bros">
+            Array   = {{ ['Harshit', 'Mohit'][0] }}
+        </div>
+    </div>
+    
+</body>
+</html>
